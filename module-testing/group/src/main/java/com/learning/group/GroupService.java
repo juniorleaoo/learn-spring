@@ -1,6 +1,7 @@
 package com.learning.group;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,12 @@ public class GroupService {
         return groupRepository.getById(id);
     }
 
-    public Group updateGroup(Group group) {
-        return groupRepository.save(group);
+    public Optional<Group> updateGroup(Long id, Group group) {
+        return groupRepository.findById(id).map(record -> {
+            record.setName(group.getName());
+            record.setUsers(group.getUsers());
+            return groupRepository.save(record);
+        });
     }
 
     public void deleteGroup(Long id) {
