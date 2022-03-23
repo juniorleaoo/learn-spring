@@ -1,0 +1,4 @@
+spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
